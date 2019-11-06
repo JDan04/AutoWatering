@@ -1,4 +1,4 @@
- # Import needed libraries
+ # Imports needed libraries
 import paho.mqtt.client as mqtt
 from datetime import datetime
 import RPi.GPIO as GPIO
@@ -6,13 +6,22 @@ import time
 import sys
 import os
 
+# Imports classes from other files
+from devices import Device
+
 try:
-    devices = {"valve1": ["Off", 23], "valve2": ["Off", 24]}
+    # Initialize devices
+    valve1 = Device("Valve1 Display Name", "valve", 23, "Off")
+    valve2 = Device("Valve2 Display Name", "valve", 24, "Off")
+    sw_status = Device("Software Status LED", "LED", 25, "Off")
 
-	# Sets software status LED pin
-    sw_status = 25
+    # Creates list of devices of type valve
+    valves = []
+    for i in Device.devices:
+        if globals()[i.type] == "valve":
+            valves.append(i)
 
-    fail_con_startup = 1
+    fail_con_startup = 1 # Initializes used variables 
 
     found = False
 
@@ -28,13 +37,14 @@ try:
 
     # Setup GPIO
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(devices["valve1"][1], GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(devices["valve2"][1], GPIO.OUT, initial=GPIO.HIGH)
-    GPIO.setup(sw_status, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(valve1.pin, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(valve2.pin, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(sw_status.pin, GPIO.OUT, initial=GPIO.HIGH)
 
+    # Create files for recording time
     def create_files():
-        for device, info in devices.items():
-            t = open(device + "_time.txt", "w")
+        for i in valves:
+            t = open(i + "_time.txt", "w")  ########################################################### STOPED HEREEEE
             t.write(str(datetime.now())[5:10] + ' {}'.format(init_time))
             t.close()
 

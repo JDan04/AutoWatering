@@ -9,8 +9,14 @@ class Group:
         else:
             display_name = name
 
-class Device:
-    def __init__(self, display_name, pin, status):
+class Device(object):
+    devices = []
+
+    def __init__(self, name, display_name, type, pin, status):
         self.name = name
+        self.display_name = display_name
+        self.type = type
         self.pin = pin
         self.status = status
+
+        self.devices.append(name)
