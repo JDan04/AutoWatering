@@ -1,0 +1,9 @@
+{"devices": {"valve1": {"display_name": "Valve1 Display name", "type": "valve", "pin": "23"},
+             "valve2": {"display_name": "Valve2 Display name", "type": "valve", "pin": "24"}
+             },
+ "data": {"name": "Watering",
+          "wifi": ["SSID", "usr", "pass"],
+          "broker": ["192.168.1.130", "port"],
+          "topic": {"sub": "well/action", "pub": "well/log"}
+          }
+ }

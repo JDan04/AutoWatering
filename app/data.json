@@ -1,0 +1,4 @@
+{"devices": {"valve1": {"display_name": "Valve1 Display name", "type": "valve", "topic": {"sub": "well/action", "pub": "well/log"}},
+             "valve2": {"display_name": "Valve2 Display name", "type": "valve", "topic": {"sub": "well/action", "pub": "well/log"}}
+             }
+ }
